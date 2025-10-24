@@ -15,12 +15,23 @@ export default function Home() {
           <span className="logo-dot">🧿</span>
           <span className="brand-text">مِسباحي</span>
         </div>
-        <input className="search-input" placeholder="🔍 ابحث عن مسباح..." />
+        <input
+          className="search-input"
+          placeholder="🔍 ابحث عن مسباح..."
+          onChange={(e) => {
+            // لاحقاً نضيف فلترة حقيقية
+          }}
+        />
       </header>
 
       <div className="grid">
         {items.map((it) => (
-          <div className="card" key={it.id}>
+          <div
+            className="card"
+            key={it.id}
+            onClick={() => window.open(`/product.html?id=${it.id}`, "_self")}
+            style={{ cursor: "pointer" }}
+          >
             <div className="img-wrap">
               <img src={it.img} alt={it.title} />
             </div>
