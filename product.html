@@ -1,0 +1,35 @@
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  const all = JSON.parse(localStorage.getItem("myListings") || "[]");
+  let item = all.find(x => String(x.id) === String(id));
+
+  if (!item) {
+    // fallback تجريبي لو ما كان من إعلاناتك
+    item = {
+      id,
+      title: `مسباح مثال #${id}`,
+      price: (10 + Number(id)) + " د.ك",
+      img: `https://picsum.photos/seed/misbah${id}/600/400`,
+      desc: "حبات كهرمان طبيعي، صناعة جميلة ✨",
+      ownerName: "بائع",
+      ownerPhone: "96560000000"
+    };
+  }
+
+  document.getElementById("content").innerHTML = `
+    <h2 class="page-title">${item.title}</h2>
+    <div class="img-wrap" style="margin-bottom:12px;">
+      <img src="${item.image || item.img}" style="width:100%; border-radius:12px" />
+    </div>
+    <p style="color:#f7c65b; font-weight:800; font-size:18px">${item.price}</p>
+    ${item.desc ? `<p style="margin:12px 0 14px;">${item.desc}</p>` : ""}
+    <a class="primary-btn" href="https://wa.me/${(item.ownerPhone||'96560000000').replace('+','')}"
+       target="_blank" style="text-align:center; display:block;">تواصل واتساب 📩</a>
+    <button onclick="history.back()"
+      style="width:100%;margin-top:10px;background:#444;border:none;padding:12px;border-radius:12px;color:#fff;">
+      رجوع 🔙
+    </button>
+  `;
+</script>
