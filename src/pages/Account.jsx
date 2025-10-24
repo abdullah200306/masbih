@@ -1,6 +1,4 @@
-import React from "react";
-
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Account() {
   const [user, setUser] = useState(null);
@@ -9,11 +7,12 @@ export default function Account() {
   const [phone, setPhone] = useState("");
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("user") || "null");
-    if (saved) setUser(saved);
+    const u = JSON.parse(localStorage.getItem("user") || "null");
+    if (u) setUser(u);
   }, []);
 
   const login = () => {
+    if (!phone) return alert("أدخل رقم الواتساب.");
     const u = { name: name || "مستخدم", phone: code + phone };
     localStorage.setItem("user", JSON.stringify(u));
     setUser(u);
@@ -22,7 +21,7 @@ export default function Account() {
 
   const logout = () => {
     localStorage.removeItem("user");
-    localStorage.removeItem("myListings");
+    // لا نحذف الإعلانات حتى يرجع يشوفها لو دخل بنفس الجهاز
     setUser(null);
     alert("تم تسجيل الخروج ✅");
   };
@@ -33,19 +32,17 @@ export default function Account() {
 
       {!user ? (
         <>
+          <input className="input" placeholder="اسمك" value={name} onChange={(e)=>setName(e.target.value)} />
           <div className="phone-box">
-            <input className="input" placeholder="اسمك" value={name} onChange={e=>setName(e.target.value)} />
-          </div>
-          <div className="phone-box">
-            <select className="select-country" value={code} onChange={e=>setCode(e.target.value)}>
+            <select className="select-country" value={code} onChange={(e)=>setCode(e.target.value)}>
               {["+965","+966","+971","+974","+968","+973","+20","+962","+964","+212"].map((c,i)=>
                 <option key={i} value={c}>{c}</option>
               )}
             </select>
-            <input className="phone-input" placeholder="رقم الواتساب" value={phone} onChange={e=>setPhone(e.target.value)} />
+            <input className="phone-input" placeholder="رقم الواتساب" value={phone} onChange={(e)=>setPhone(e.target.value)} />
           </div>
           <button className="primary-btn" onClick={login}>تسجيل الدخول</button>
-          <p className="muted">* حالياً بدون تحقق — للتجربة.</p>
+          <p className="muted" style={{marginTop:8}}>الضيف يقدر يتصفح فقط. للتجربة الآن الحفظ على هذا الجهاز.</p>
         </>
       ) : (
         <>
