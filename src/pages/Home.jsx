@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 
 export default function Home() {
-  const items = Array.from({ length: 8 }).map((_, i) => ({
-    id: i + 1,
-    title: `مسباح مثال #${i + 1}`,
-    price: (10 + i) + " د.ك",
-    img: `https://picsum.photos/seed/misbah${i}/600/400`,
-  }));
+  const [q, setQ] = useState("");
+
+  const items = useMemo(() =>
+    Array.from({ length: 12 }).map((_, i) => ({
+      id: i + 1,
+      title: `مسباح مثال #${i + 1}`,
+      price: (10 + i) + " د.ك",
+      img: `https://picsum.photos/seed/misbah${i}/600/400`,
+      kind: i % 2 ? "كهرمان" : "مورانو",
+    })), []
+  );
+
+  const filtered = useMemo(() => {
+    const s = q.trim();
+    if (!s) return items;
+    return items.filter(it => (it.title + " " + it.kind).includes(s));
+  }, [q, items]);
 
   return (
     <div className="page">
@@ -17,20 +28,20 @@ export default function Home() {
         </div>
         <input
           className="search-input"
-          placeholder="🔍 ابحث عن مسباح..."
-          onChange={(e) => {
-            // لاحقاً نضيف فلترة حقيقية
-          }}
+          placeholder="🔍 ابحث عن مسباح (مثال: كهرمان)"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
         />
       </header>
 
       <div className="grid">
-        {items.map((it) => (
+        {filtered.map((it) => (
           <div
             className="card"
             key={it.id}
-            onClick={() => window.open(`/product.html?id=${it.id}`, "_self")}
+            onClick={() => (window.location.href = `/product.html?id=${it.id}`)}
             style={{ cursor: "pointer" }}
+            title="اضغط لعرض التفاصيل"
           >
             <div className="img-wrap">
               <img src={it.img} alt={it.title} />
