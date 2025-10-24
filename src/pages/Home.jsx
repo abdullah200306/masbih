@@ -3,7 +3,7 @@ export default function Home() {
     id: i + 1,
     title: `مسباح مثال #${i + 1}`,
     price: (10 + i) + " د.ك",
-    img: `https://picsum.photos/seed/misbah${i}/400/300`,
+    img: `https://picsum.photos/seed/misbah${i}/600/400`,
   }));
 
   return (
