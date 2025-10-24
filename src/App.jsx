@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function App() {
   return (
     <div style={{direction:"rtl",background:"#111",color:"#0f0",minHeight:"100vh",padding:"24px"}}>
