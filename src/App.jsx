@@ -1,10 +1,10 @@
 // App.jsx ✅ (Arabic / Bottom Navigation / Guest Mode)
 
 import React, { useState } from "react";
-import Home from "./pages/Home";
-import MyListings from "./pages/MyListings";
-import AddListing from "./pages/AddListing";
-import Account from "./pages/Account";
+import Home from "./pages/Home.jsx";
+import MyListings from "./pages/MyListings.jsx";
+import AddListing from "./pages/AddListing.jsx";
+import Account from "./pages/Account.jsx";
 
 export default function App() {
   const [page, setPage] = useState("home");
