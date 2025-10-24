@@ -2,7 +2,7 @@ name: Deploy Vite to GitHub Pages
 
 on:
   push:
-    branches: [ main ]   # لو فرعك اسمه غير main بدّله هنا
+    branches: [ main ]
 
 permissions:
   contents: write
@@ -25,7 +25,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      # مهم: ننسخ index.html إلى 404.html لتفادي 404 مع SPA
       - name: SPA fallback
         run: cp dist/index.html dist/404.html
 
