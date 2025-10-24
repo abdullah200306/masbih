@@ -9,8 +9,6 @@ export default function App() {
 
   useEffect(() => {
     document.title = "مِسباحي — سوق المسابيح";
-    document.body.style.background = "#0b0b0e";
-    document.body.style.color = "#e5e7eb";
   }, []);
 
   const render = () => {
@@ -22,14 +20,13 @@ export default function App() {
   };
 
   return (
-    <div style={{ direction: "rtl", minHeight: "100vh", paddingBottom: 74 }}>
+    <div className="app-container">
       {render()}
-
       <nav className="bottom-nav">
-        <button onClick={() => setTab("account")} className="nav-item" title="حسابي">👤 حسابي</button>
-        <button onClick={() => setTab("my")} className="nav-item" title="إعلاناتي">📣 إعلاناتي</button>
-        <button onClick={() => setTab("add")} className="nav-item add" title="إضافة">➕ إضافة</button>
-        <button onClick={() => setTab("home")} className="nav-item" title="الرئيسية">🏠 الرئيسية</button>
+        <button onClick={() => setTab("home")} className={tab === "home" ? "active" : ""}>🏠 الرئيسية</button>
+        <button onClick={() => setTab("my")} className={tab === "my" ? "active" : ""}>📣 إعلاناتي</button>
+        <button onClick={() => setTab("add")} className={tab === "add" ? "add-btn" : "add"}>➕ إضافة</button>
+        <button onClick={() => setTab("account")} className={tab === "account" ? "active" : ""}>👤 حسابي</button>
       </nav>
     </div>
   );
