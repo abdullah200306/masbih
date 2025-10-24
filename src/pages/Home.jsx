@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function Home() {
   const items = Array.from({ length: 8 }).map((_, i) => ({
     id: i + 1,
